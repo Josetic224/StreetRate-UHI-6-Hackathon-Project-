@@ -158,10 +158,21 @@ export default function App() {
   useEffect(() => {
     if (amount && streetRateData && !isNaN(Number(amount)) && Number(amount) > 0) {
       try {
-        const amountWei = parseUnits(amount, selectedCurrency.decimals);
-        const outputWei = (amountWei * streetRateData) / parseUnits('1', 18);
-        const outputFormatted = formatUnits(outputWei, 6);
-        setOutputAmount(outputFormatted);
+        // Simple calculation: amount * street_rate_decimal
+        const amountNum = Number(amount);
+        const streetRateDecimal = Number(formatUnits(streetRateData, 18));
+        const outputDecimal = amountNum * streetRateDecimal;
+        
+        // Debug logging
+        console.log('Fixed Calculation Debug:', {
+          amount,
+          amountNum,
+          streetRateDecimal,
+          outputDecimal,
+          formatted: outputDecimal.toString()
+        });
+        
+        setOutputAmount(outputDecimal.toString());
       } catch (error) {
         console.error('Calculation error:', error);
         setOutputAmount(null);
@@ -402,10 +413,14 @@ export default function App() {
                   <div className="text-center">
                     <div className="text-blue-200 text-sm font-medium mb-2">You will receive</div>
                     <div className="text-3xl font-bold text-blue-100">
-                      {Number(outputAmount) < 0.001 ? 
-                        Number(outputAmount).toFixed(8) : 
-                        Number(outputAmount).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 6})
-                      } USDC
+                      {(() => {
+                        const num = Number(outputAmount);
+                        if (num === 0) return '0';
+                        if (num < 0.000001) return num.toFixed(8);
+                        if (num < 0.01) return num.toFixed(6);
+                        if (num < 1) return num.toFixed(4);
+                        return num.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4});
+                      })()} USDC
                     </div>
                     <div className="text-blue-300 text-sm mt-2">
                       Rate: 1 {selectedCurrency.code} = {streetRateData ? 
