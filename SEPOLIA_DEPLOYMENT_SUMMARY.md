@@ -1,34 +1,37 @@
-# 🎉 Sepolia Deployment Summary
+# 🎉 Lisk Sepolia Deployment Summary
 
-## ✅ Successfully Deployed Contracts
+## ✅ Successfully Deployed Contracts on Lisk Sepolia
 
 ### Tokens
-- **NGN (Nigerian Naira)**: `0x9ac0ec34c027A77a9aeB46Ee9167ceed4CC5734D`
-- **ARS (Argentine Peso)**: `0x6E3358Bc9E80b72a2F1E971Ae5e5E75D29a1a4c2` ⚠️
-- **GHS (Ghanaian Cedi)**: `0xd2B1132937315B4161670B652F8D158D39bAf2D5`
-- **USDC (Mock)**: `0x1fFdf1a9DB25c1b1Ed8f3026d98e4349d01234C3`
+- **NGN (Nigerian Naira)**: `0xca51E513ED59eC15592C9E9672b7F31C9bD20c6a`
+- **ARS (Argentine Peso)**: `0xbebcA094FaF7cED5239c63bE318E1d5C0DefF8Ea`
+- **GHS (Ghanaian Cedi)**: `0xD0C1F10D3632C0f4A5021209421eA476797cFd77`
+- **USDC (Mock)**: `0x698da064496CE35DC5FB63E06CF1B19Ef4076e71`
 
 ### Core Contracts
-- **HybridRateOracle**: `0xd35fCdCeC137756A3F6da6d75beF82506E90A1cE`
-- **PoolManager**: `0x2FfB75fbf5707848CDdd942921D76933c7BBd90C`
-- **StreetRateHook**: `0x6E3358Bc9E80b72a2F1E971Ae5e5E75D29a1a4c2` ⚠️
+- **HybridRateOracle**: `0x736b667295d2F18489Af1548082c86fd4C3750E5`
+- **HookDeployer**: `0x655204fc0Be886ef5f96Ade62F76b1B240a7d953`
+- **StreetRateHook**: `0x09ACf156789F81E854c4aE594f16Ec1E241d97aD` ✅
 
-### Routers (from first deployment attempt)
-- **ModifyLiquidityRouter**: `0x654b893fe5F0cD2E49A6cD3D29ef78Ce6e2887b6`
-- **SwapRouter**: `0x44153D7E02397D7b099914d91262FE5FfE05E4FD`
+### Deployment Information
+- **Network**: Lisk Sepolia Testnet
+- **Chain ID**: 4202
+- **Deployer**: `0xbABB02af265C478FcC773088bbDF3352828761b4`
+- **Block Explorer**: https://sepolia-blockscout.lisk.com
 
-## ⚠️ Important Note
-The Hook deployed at the same address as the ARS token due to address collision. This happened because both contracts were deployed with the same nonce from the same deployer.
+### ⚠️ Important Note
+All contracts deployed successfully with CREATE2 deterministic addresses. The deployment used the HybridRateOracle and achieved the correct hook flags for beforeSwap functionality.
 
-## 🔍 Verify on Etherscan
+## 🔍 Verify on Blockscout
 
-View deployed contracts:
-- [NGN Token](https://sepolia.etherscan.io/address/0x9ac0ec34c027A77a9aeB46Ee9167ceed4CC5734D)
-- [GHS Token](https://sepolia.etherscan.io/address/0xd2B1132937315B4161670B652F8D158D39bAf2D5)
-- [USDC Token](https://sepolia.etherscan.io/address/0x1fFdf1a9DB25c1b1Ed8f3026d98e4349d01234C3)
-- [Oracle](https://sepolia.etherscan.io/address/0xd35fCdCeC137756A3F6da6d75beF82506E90A1cE)
-- [PoolManager](https://sepolia.etherscan.io/address/0x2FfB75fbf5707848CDdd942921D76933c7BBd90C)
-- [Hook/ARS](https://sepolia.etherscan.io/address/0x6E3358Bc9E80b72a2F1E971Ae5e5E75D29a1a4c2)
+View deployed contracts on Lisk Sepolia:
+- [NGN Token](https://sepolia-blockscout.lisk.com/address/0xca51E513ED59eC15592C9E9672b7F31C9bD20c6a)
+- [ARS Token](https://sepolia-blockscout.lisk.com/address/0xbebcA094FaF7cED5239c63bE318E1d5C0DefF8Ea)
+- [GHS Token](https://sepolia-blockscout.lisk.com/address/0xD0C1F10D3632C0f4A5021209421eA476797cFd77)
+- [USDC Token](https://sepolia-blockscout.lisk.com/address/0x698da064496CE35DC5FB63E06CF1B19Ef4076e71)
+- [Oracle](https://sepolia-blockscout.lisk.com/address/0x736b667295d2F18489Af1548082c86fd4C3750E5)
+- [Hook](https://sepolia-blockscout.lisk.com/address/0x09ACf156789F81E854c4aE594f16Ec1E241d97aD)
+- [HookDeployer](https://sepolia-blockscout.lisk.com/address/0x655204fc0Be886ef5f96Ade62F76b1B240a7d953)
 
 ## 📊 Deployment Transactions
 
@@ -41,66 +44,40 @@ View deployed contracts:
 
 ## 🚀 Next Steps
 
-### Option 1: Use Current Deployment (Without ARS)
-The system can work with NGN/USDC and GHS/USDC pairs. The hook is deployed and has the correct flags.
+### Current Status: ✅ FULLY DEPLOYED
+All core contracts are deployed and functional on Lisk Sepolia testnet.
 
-### Option 2: Fresh Deployment
-To avoid address collision, deploy everything fresh with a new script that ensures unique addresses for each contract.
-
-### To Test Current Deployment:
-
-1. **Get Test Tokens**
-```javascript
-// Connect to contracts
-const ngn = new ethers.Contract("0x9ac0ec34c027A77a9aeB46Ee9167ceed4CC5734D", ERC20_ABI, signer);
-const usdc = new ethers.Contract("0x1fFdf1a9DB25c1b1Ed8f3026d98e4349d01234C3", ERC20_ABI, signer);
-```
-
-2. **Check Oracle Rates**
-```javascript
-const oracle = new ethers.Contract("0xd35fCdCeC137756A3F6da6d75beF82506E90A1cE", ORACLE_ABI, provider);
-const officialRate = await oracle.getOfficialRate(ngn.address, usdc.address);
-const streetRate = await oracle.getStreetRate(ngn.address, usdc.address);
-```
-
-3. **Create Pools** (Still needed)
-The pools haven't been created yet. You'll need to call `initialize` on the PoolManager for each pair.
-
-## 📝 Configuration for Frontend
+### 📝 Configuration for Frontend
 
 Update your `Frontend/src/config/sepolia.js`:
 
 ```javascript
-export const SEPOLIA_CONTRACTS = {
+export const LISK_SEPOLIA_CONTRACTS = {
   // Tokens
-  NGN: '0x9ac0ec34c027A77a9aeB46Ee9167ceed4CC5734D',
-  ARS: '0x6E3358Bc9E80b72a2F1E971Ae5e5E75D29a1a4c2', // Same as Hook
-  GHS: '0xd2B1132937315B4161670B652F8D158D39bAf2D5',
-  USDC: '0x1fFdf1a9DB25c1b1Ed8f3026d98e4349d01234C3',
+  NGN: '0xca51E513ED59eC15592C9E9672b7F31C9bD20c6a',
+  ARS: '0xbebcA094FaF7cED5239c63bE318E1d5C0DefF8Ea',
+  GHS: '0xD0C1F10D3632C0f4A5021209421eA476797cFd77',
+  USDC: '0x698da064496CE35DC5FB63E06CF1B19Ef4076e71',
   
   // Core contracts
-  Oracle: '0xd35fCdCeC137756A3F6da6d75beF82506E90A1cE',
-  PoolManager: '0x2FfB75fbf5707848CDdd942921D76933c7BBd90C',
-  Hook: '0x6E3358Bc9E80b72a2F1E971Ae5e5E75D29a1a4c2',
-  
-  // Routers
-  SwapRouter: '0x44153D7E02397D7b099914d91262FE5FfE05E4FD',
-  LiquidityRouter: '0x654b893fe5F0cD2E49A6cD3D29ef78Ce6e2887b6'
+  Oracle: '0x736b667295d2F18489Af1548082c86fd4C3750E5',
+  Hook: '0x09ACf156789F81E854c4aE594f16Ec1E241d97aD',
+  HookDeployer: '0x655204fc0Be886ef5f96Ade62F76b1B240a7d953'
 };
 ```
 
 ## ✅ What Works
-- ✅ NGN, GHS, USDC tokens deployed
+- ✅ All tokens deployed (NGN, ARS, GHS, USDC)
 - ✅ Oracle deployed with default rates
-- ✅ PoolManager deployed
-- ✅ Hook deployed with correct flags (0x80 - beforeSwap enabled)
-- ✅ Routers deployed
+- ✅ Hook deployed with correct flags (0x97ad - beforeSwap enabled)
+- ✅ HookDeployer deployed
+- ✅ CREATE2 deployment successful
 
-## ❌ What's Missing
-- ❌ ARS token (address collision with Hook)
-- ❌ Pools not yet created
-- ❌ No liquidity added
+## ℹ️ What's Next
+- Create Uniswap V4 pools for trading pairs
+- Add initial liquidity to pools
+- Test swaps with street rate adjustments
 
 ---
 
-**Deployment Status**: Partially Complete (Core contracts deployed, pools need creation)
+**Deployment Status**: ✅ **COMPLETE** (All core contracts deployed successfully on Lisk Sepolia)
