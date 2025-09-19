@@ -1,81 +1,8 @@
-// Sepolia Testnet Configuration
-export const SEPOLIA_CHAIN_ID = 11155111;
-
-export const SEPOLIA_RPC_URLS = [
-  'https://sepolia.infura.io/v3/YOUR_INFURA_KEY',
-  'https://rpc.sepolia.org',
-  'https://ethereum-sepolia.publicnode.com',
-  'https://sepolia.gateway.tenderly.co'
-];
-
-// Contract addresses (to be updated after deployment)
-export const SEPOLIA_CONTRACTS = {
-  // Tokens
-  NGN: '0x0000000000000000000000000000000000000000',
-  ARS: '0x0000000000000000000000000000000000000000',
-  GHS: '0x0000000000000000000000000000000000000000',
-  USDC: '0x0000000000000000000000000000000000000000',
-  
-  // Core contracts
-  Oracle: '0x0000000000000000000000000000000000000000',
-  PoolManager: '0x0000000000000000000000000000000000000000',
-  Hook: '0x0000000000000000000000000000000000000000',
-  
-  // Routers
-  SwapRouter: '0x0000000000000000000000000000000000000000',
-  LiquidityRouter: '0x0000000000000000000000000000000000000000',
-  
-  // Pool IDs
-  Pools: {
-    'NGN/USDC': '0x0000000000000000000000000000000000000000000000000000000000000000',
-    'ARS/USDC': '0x0000000000000000000000000000000000000000000000000000000000000000',
-    'GHS/USDC': '0x0000000000000000000000000000000000000000000000000000000000000000'
-  }
-};
-
-// Token metadata
-export const TOKEN_INFO = {
-  NGN: {
-    symbol: 'NGN',
-    name: 'Nigerian Naira',
-    decimals: 18,
-    flag: '🇳🇬',
-    officialRate: 800,  // NGN per USD
-    streetRate: 1500    // NGN per USD
-  },
-  ARS: {
-    symbol: 'ARS',
-    name: 'Argentine Peso',
-    decimals: 18,
-    flag: '🇦🇷',
-    officialRate: 350,   // ARS per USD
-    streetRate: 1000     // ARS per USD
-  },
-  GHS: {
-    symbol: 'GHS',
-    name: 'Ghanaian Cedi',
-    decimals: 18,
-    flag: '🇬🇭',
-    officialRate: 12,    // GHS per USD
-    streetRate: 15       // GHS per USD
-  },
-  USDC: {
-    symbol: 'USDC',
-    name: 'USD Coin',
-    decimals: 6,
-    flag: '💵'
-  }
-};
-
-// Network configuration for wallet
-export const SEPOLIA_NETWORK = {
-  chainId: '0x' + SEPOLIA_CHAIN_ID.toString(16),
-  chainName: 'Sepolia Testnet',
-  nativeCurrency: {
-    name: 'Sepolia ETH',
-    symbol: 'ETH',
-    decimals: 18
-  },
-  rpcUrls: SEPOLIA_RPC_URLS,
-  blockExplorerUrls: ['https://sepolia.etherscan.io']
+export const CONTRACT_ADDRESSES = {
+  NGN: "0xd2B1132937315B4161670B652F8D158D39bAf2D5",
+  ARS: "0x1fFdf1a9DB25c1b1Ed8f3026d98e4349d01234C3",
+  GHS: "0xd35fCdCeC137756A3F6da6d75beF82506E90A1cE",
+  USDC: "0x1e5FC9e7460431B779F48633A99c6Bd352e39aA9",
+  ORACLE: "0x2FfB75fbf5707848CDdd942921D76933c7BBd90C",
+  HOOK: "0xE3c149F704B924C4Ff14FC898dE4d9387C5cB9EC"
 };

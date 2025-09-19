@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # Load environment variables
-source .env
+source ./Smart-Contract/.env
+
+# Debug variable loading
+echo "🔍 Debug: Loading environment variables"
+echo "SEPOLIA_RPC_URL: $SEPOLIA_RPC_URL"
+echo "PRIVATE_KEY: $PRIVATE_KEY"
+echo "ETHERSCAN_API_KEY: $ETHERSCAN_API_KEY"
 
 echo "🚀 Deploying StreetRateHook to Sepolia Testnet..."
 echo "================================================"
@@ -35,7 +41,7 @@ echo "💰 Balance: $(cast from-wei $BALANCE) ETH"
 MIN_BALANCE="10000000000000000" # 0.01 ETH in wei
 if [ $(echo "$BALANCE < $MIN_BALANCE" | bc) -eq 1 ]; then
     echo "❌ Error: Insufficient balance. Need at least 0.01 ETH"
-    echo "   Get testnet ETH from: https://sepoliafaucet.com"
+    echo "   Get testnet ETH from: https://faucet.lisk.com"
     exit 1
 fi
 
@@ -44,9 +50,9 @@ echo "🔨 Starting deployment..."
 echo ""
 
 # Run deployment script
-forge script script/DeployWithCreate2.s.sol \
-    --tc DeployWithCreate2 \
+forge script script/DeployWithCreate2.s.sol:DeployWithCreate2 \
     --rpc-url $SEPOLIA_RPC_URL \
+    --chain-id 4202 \
     --broadcast \
     --verify \
     --etherscan-api-key $ETHERSCAN_API_KEY \
