@@ -5,16 +5,17 @@ source ./Smart-Contract/.env
 
 # Debug variable loading
 echo "🔍 Debug: Loading environment variables"
-echo "SEPOLIA_RPC_URL: $SEPOLIA_RPC_URL"
+echo "LISK_SEPOLIA_RPC_URL: $LISK_SEPOLIA_RPC_URL"
 echo "PRIVATE_KEY: $PRIVATE_KEY"
-echo "ETHERSCAN_API_KEY: $ETHERSCAN_API_KEY"
+echo "LISK_SEPOLIA_API_KEY: $LISK_SEPOLIA_API_KEY"
 
-echo "🚀 Deploying StreetRateHook to Sepolia Testnet..."
+echo "🚀 Deploying StreetRateHook to Lisk Sepolia Testnet..."
 echo "================================================"
 
 # Check if required env vars are set
-if [ -z "$SEPOLIA_RPC_URL" ]; then
-    echo "❌ Error: SEPOLIA_RPC_URL not set in .env"
+if [ -z "$LISK_SEPOLIA_RPC_URL" ]; then
+    echo "❌ Error: LISK_SEPOLIA_RPC_URL not set in .env"
+    echo "   Set LISK_SEPOLIA_RPC_URL=https://rpc.sepolia-api.lisk.com in .env"
     exit 1
 fi
 
@@ -30,11 +31,11 @@ if [[ ! "$PRIVATE_KEY" =~ ^0x ]]; then
 fi
 
 echo "✅ Environment variables loaded"
-echo "📡 RPC URL: $SEPOLIA_RPC_URL"
+echo "📡 RPC URL: $LISK_SEPOLIA_RPC_URL"
 echo "🔑 Deployer: $(cast wallet address $PRIVATE_KEY)"
 
 # Check balance
-BALANCE=$(cast balance $(cast wallet address $PRIVATE_KEY) --rpc-url $SEPOLIA_RPC_URL)
+BALANCE=$(cast balance $(cast wallet address $PRIVATE_KEY) --rpc-url $LISK_SEPOLIA_RPC_URL)
 echo "💰 Balance: $(cast from-wei $BALANCE) ETH"
 
 # Check if balance is sufficient
@@ -51,17 +52,18 @@ echo ""
 
 # Run deployment script
 forge script script/DeployWithCreate2.s.sol:DeployWithCreate2 \
-    --rpc-url $SEPOLIA_RPC_URL \
+    --rpc-url $LISK_SEPOLIA_RPC_URL \
     --chain-id 4202 \
     --broadcast \
     --verify \
-    --etherscan-api-key $ETHERSCAN_API_KEY \
+    --verifier blockscout \
+    --verifier-url https://sepolia-blockscout.lisk.com/api \
     -vvv
 
 if [ $? -eq 0 ]; then
     echo ""
     echo "✅ Deployment successful!"
-    echo "📄 Check deployments/sepolia.json for contract addresses"
+    echo "📄 Check deployments/lisk-sepolia.json for contract addresses"
 else
     echo ""
     echo "❌ Deployment failed"
