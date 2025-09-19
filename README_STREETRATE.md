@@ -1,8 +1,22 @@
-# StreetRate Hook for Uniswap v4
+# 🌍 StreetRate Hook - LIVE ON LISK SEPOLIA ✅
+
+## 📢 Deployment Status: **FULLY DEPLOYED**
+
+**Network**: Lisk Sepolia Testnet (Chain ID: 4202)  
+**Hook Address**: `0x09ACf156789F81E854c4aE594f16Ec1E241d97aD`  
+**Explorer**: https://sepolia-blockscout.lisk.com
+
+### 📁 Live Contract Addresses
+| Contract | Address | Explorer |
+|----------|---------|----------|
+| **Hook** | `0x09ACf156789F81E854c4aE594f16Ec1E241d97aD` | [View](https://sepolia-blockscout.lisk.com/address/0x09ACf156789F81E854c4aE594f16Ec1E241d97aD) |
+| **Oracle** | `0x736b667295d2F18489Af1548082c86fd4C3750E5` | [View](https://sepolia-blockscout.lisk.com/address/0x736b667295d2F18489Af1548082c86fd4C3750E5) |
+| **NGN Token** | `0xca51E513ED59eC15592C9E9672b7F31C9bD20c6a` | [View](https://sepolia-blockscout.lisk.com/address/0xca51E513ED59eC15592C9E9672b7F31C9bD20c6a) |
+| **USDC Token** | `0x698da064496CE35DC5FB63E06CF1B19Ef4076e71` | [View](https://sepolia-blockscout.lisk.com/address/0x698da064496CE35DC5FB63E06CF1B19Ef4076e71) |
 
 ## Overview
 
-The StreetRate Hook is a Uniswap v4 hook that intercepts swap execution to apply street exchange rates from an oracle, allowing pools to reflect real-world currency exchange rates (particularly useful for emerging market currencies like NGN, GHS, etc.).
+The StreetRate Hook is a **live, deployed** Uniswap v4 hook on Lisk Sepolia that intercepts swap execution to apply street exchange rates from an oracle, allowing pools to reflect real-world currency exchange rates (particularly useful for emerging market currencies like NGN, GHS, etc.).
 
 ## Deliverables
 
@@ -50,7 +64,7 @@ The StreetRate Hook is a Uniswap v4 hook that intercepts swap execution to apply
 - **Admin Control**: Threshold can be updated by contract owner
 
 ### Events
-```solidity
+``solidity
 event RateChecked(
     address indexed tokenIn,
     address indexed tokenOut,
@@ -76,7 +90,7 @@ event SwapExecuted(
 
 ## Usage Example
 
-```solidity
+``solidity
 // Deploy oracle
 MockStreetRateOracle oracle = new MockStreetRateOracle();
 
@@ -102,7 +116,7 @@ uint256 amountOut = hook.executeSwap(
 
 ## Running Tests
 
-```bash
+``bash
 # Run all tests
 forge test --match-path test/StreetRateHookStandalone.t.sol -vv
 

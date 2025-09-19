@@ -51,15 +51,35 @@ forge test --summary         # Summary view
 ```bash
 cd Smart-Contract
 
-# Deploy complete system
-forge script script/DeployHybridSystem.s.sol --broadcast
+# Deploy complete system to Lisk Sepolia
+./deploy.sh
 
-# Deploy with CREATE2
-forge script script/DeployWithCreate2.s.sol --broadcast
-
-# Deploy with V4 pool
-forge script script/DeployPoolWithHook.s.sol --broadcast
+# Or manually with Foundry
+forge script script/DeployWithCreate2.s.sol:DeployWithCreate2 \
+    --rpc-url https://rpc.sepolia-api.lisk.com \
+    --chain-id 4202 \
+    --broadcast
 ```
+
+## 🔗 Deployed Contracts (Lisk Sepolia)
+
+### 💰 Tokens
+| Token | Address |
+|-------|----------|
+| NGN | `0xca51E513ED59eC15592C9E9672b7F31C9bD20c6a` |
+| ARS | `0xbebcA094FaF7cED5239c63bE318E1d5C0DefF8Ea` |
+| GHS | `0xD0C1F10D3632C0f4A5021209421eA476797cFd77` |
+| USDC | `0x698da064496CE35DC5FB63E06CF1B19Ef4076e71` |
+
+### 🏢 Infrastructure
+| Contract | Address |
+|----------|----------|
+| Oracle | `0x736b667295d2F18489Af1548082c86fd4C3750E5` |
+| Hook | `0x09ACf156789F81E854c4aE594f16Ec1E241d97aD` |
+| HookDeployer | `0x655204fc0Be886ef5f96Ade62F76b1B240a7d953` |
+
+**Network**: Lisk Sepolia (Chain ID: 4202)  
+**Explorer**: https://sepolia-blockscout.lisk.com
 
 ## 📊 Test Results
 
