@@ -46,23 +46,40 @@ address = keccak256(
 
 ## Deployment Results
 
-Our deployment successfully found a valid address:
+Our deployment successfully found a valid address on **Lisk Sepolia**:
 
 ```
-Hook Address: 0x0EDfab09774DB7cF80a9D784EeE0F6DDfB367ca4
+Hook Address: 0x09ACf156789F81E854c4aE594f16Ec1E241d97aD
 Salt:         0
-Flags:        0x7ca4
+Flags:        0x97ad
+Network:      Lisk Sepolia (Chain ID: 4202)
 ```
 
-Breaking down the flags (0x7ca4):
-- Binary: 0111 1100 1010 0100
+Breaking down the flags (0x97ad):
+- Binary: 1001 0111 1010 1101
 - Bit 7 is set ✅ (beforeSwap enabled)
+
+## Complete Deployment Addresses (Lisk Sepolia)
+
+### Tokens
+- **NGN**: `0xca51E513ED59eC15592C9E9672b7F31C9bD20c6a`
+- **ARS**: `0xbebcA094FaF7cED5239c63bE318E1d5C0DefF8Ea`
+- **GHS**: `0xD0C1F10D3632C0f4A5021209421eA476797cFd77`
+- **USDC**: `0x698da064496CE35DC5FB63E06CF1B19Ef4076e71`
+
+### Infrastructure
+- **Oracle**: `0x736b667295d2F18489Af1548082c86fd4C3750E5`
+- **HookDeployer**: `0x655204fc0Be886ef5f96Ade62F76b1B240a7d953`
+- **Hook**: `0x09ACf156789F81E854c4aE594f16Ec1E241d97aD`
 
 ## Usage
 
-### Deploy with CREATE2
+### Deploy with CREATE2 on Lisk Sepolia
 ```bash
-forge script script/DeployWithCreate2.s.sol:DeployWithCreate2 --broadcast
+forge script script/DeployWithCreate2.s.sol:DeployWithCreate2 \
+    --rpc-url https://rpc.sepolia-api.lisk.com \
+    --chain-id 4202 \
+    --broadcast
 ```
 
 ### Find Salt Only (without deploying)
@@ -113,17 +130,19 @@ function hasCorrectFlags(address hookAddress) public pure returns (bool) {
 
 ## Integration with Uniswap v4
 
-The hook is now ready for Uniswap v4 integration:
+The hook is now ready for Uniswap v4 integration on Lisk Sepolia:
 
-1. **Register Hook**: Register with PoolManager
+1. **Hook Deployed**: `0x09ACf156789F81E854c4aE594f16Ec1E241d97aD`
 2. **Configure Pools**: Set hook for NGN/USDC, ARS/USDC, GHS/USDC pools
 3. **Enable Swaps**: Hook automatically intercepts via beforeSwap
+4. **Network**: Lisk Sepolia (Chain ID: 4202)
 
 ## Summary
 
-✅ **CREATE2 Deployment Working**
-✅ **Correct Flag Pattern (0x80 for beforeSwap)**
+✅ **CREATE2 Deployment Working on Lisk Sepolia**
+✅ **Correct Flag Pattern (0x97ad includes 0x80 for beforeSwap)**
 ✅ **Deterministic Address Generation**
 ✅ **Ready for Uniswap v4 Integration**
+✅ **All Contracts Deployed Successfully**
 
-The StreetRateHook is now properly deployed with CREATE2, ensuring it has the correct address pattern to function as a Uniswap v4 hook!
+The StreetRateHook is now properly deployed with CREATE2 on Lisk Sepolia, ensuring it has the correct address pattern to function as a Uniswap v4 hook!
