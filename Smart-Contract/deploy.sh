@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load environment variables
-source ./Smart-Contract/.env
+source .env
 
 # Debug variable loading
 echo "🔍 Debug: Loading environment variables"
